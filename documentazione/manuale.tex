@@ -1,0 +1,146 @@
+\section{Manuale del PoC}
+\subsection{Introduzione}
+In questa sezione verranno descritte come usare le varie librerie disponibili, per analizzare i vari contratti dei metodi dell'interfaccia comune \textit{ReputationController} vedere documentazione contenuta direttamente nella classe.
+
+
+
+
+\subsection{Uso della libreria utilizzando OrientDB e/o Neo4j}
+Con il seguente codice viene creata un applicazione Spring Boot che potr\'a sfruttare, grazie al campo dati \textit{reputationController} che implementa \textit{ReputationController}, i metodi d'interfaccia. Il corpo del metodo run, o in generale di qualsiasi metodo evocato dell'interfaccia, \'e indipendente dal tipo di implementazione scelta.
+\begin{lstlisting}
+package it.ldario;
+
+import it.ldario.graphdbneo4j.ReputationControllerNeo4j;
+//import it.ldario.graphdborientDb.ReputationControllerOrientDb;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MiaClasse implements CommandLineRunner {
+
+    public static void main(String[] args) {
+        SpringApplication.run(MiaClasse.class, args);
+    }
+	//esplicitando il tipo verr\'a scelto, rispettivaemnte, il reputation controller di Neo4j o OrientDB
+    private ReputationControllerNeo4j reputationController;
+    //private ReputationControllerOrientDb reputationController;
+
+
+    @Autowired
+    public MiaClasse(ReputationControllerNeo4j reputationController) {
+        this.reputationController = reputationController;
+    }
+
+    @Override
+    public void run(String... strings) throws Exception {
+        //aggiunge al database scelto(orientDB oppure Neo4j), dipende dal tipo che viene dichiarato, un entity con id Luca
+        reputationController.addAccountId("Luca");
+
+        //stampa la reputazione totale dell'entity Luca
+        System.out.println(reputationController.getTotalReputation("Luca"));
+
+        //stampa il totale delle transazioni effettuale da Luca negli ultimi 15 giorni
+
+        System.out.println(reputationController.getAmountAccountIdInATimeRange("Luca", 15));
+        //aggiunge al database scelto(orientDB oppure Neo4j), dipende dal tipo che viene dichiarato, un account con id IT123
+         TransactionBuilder transactionBuilder = new TransactionBuilder();
+        transactionBuilder.setCountry("Italy").setCity("San Michele delle Badesse").setAmount(100).setCurrency("Euro");
+        reputationController.addTransaction("Luca","IT123",transactionBuilder.build());
+        
+
+    }
+}
+\end{lstlisting}
+
+
+\subsection{Uso di graphdb-insert}
+Con il seguente codice vengono generati ed aggiunti al database scelto, decidendo il tipo del capo dati \textit{reputationController}, 10 entity, 10 account(i 10 account hanno rispettivamente un loro entity deciso in modo casuale) e 10 transazioni con payer, payee e dati casuali.
+\begin{lstlisting}
+package it.ldario;
+
+
+import it.ldario.graphdbinsert.GraphDbInsertImpl;
+import it.ldario.graphdbneo4j.ReputationControllerNeo4j;
+//import it.ldario.graphdborientDb.ReputationControllerOrientDb;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+
+
+public class MiaClasse implements CommandLineRunner {
+
+    //esplicitando il tipo verr\'a scelto, rispettivaemnte, il reputation controller di Neo4j o OrientDB
+    private ReputationControllerNeo4j reputationController;
+    //private ReputationControllerOrientDb reputationController;
+
+    public static void main(String[] args) {
+        SpringApplication.run(GraphdbPocApplication.class, args);
+    }
+
+    @Autowired
+    public MiaClasse(ReputationControllerNeo4j reputationController) {
+        this.reputationController = reputationController;
+    }
+
+    @Override
+    public void run(String... strings) throws Exception {
+        GraphDbInsertImpl graphDbInsert = new GraphDbInsertImpl(10,10,10,reputationController);
+
+    }
+}
+\end{lstlisting}
+
+\subsection{Uso di graph-csv}
+Con il seguente vengono cretai 3 file csv nella root del progetto, uno per le entity, uno per gli account, uno per la relazione di appartenenza tra entity e account e un altro per le transazioni. \textbf{Questo \'e il miglior modo per creare un numero elevato di dati e poi inserirli nel database scelto tramite il suo importatore csv}.
+
+\begin{lstlisting}
+package it.ldario;
+
+
+import it.ldario.graphdbcsv.GeneratorCsv;
+import it.ldario.graphdbcsv.GeneratorCsvRandom;
+import it.ldario.graphdbneo4j.ReputationControllerNeo4j;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+
+//import it.ldario.graphdborientDb.ReputationControllerOrientDb;
+
+
+public class MiaClasse implements CommandLineRunner {
+
+    //esplicitando il tipo verr\'a scelto, rispettivaemnte, il reputation controller di Neo4j o OrientDB
+    private ReputationControllerNeo4j reputationController;
+    //private ReputationControllerOrientDb reputationController;
+
+    public static void main(String[] args) {
+        SpringApplication.run(GraphdbPocApplication.class, args);
+    }
+
+    @Override
+    public void run(String... strings) throws Exception {
+        GeneratorCsv generatorCsv = new GeneratorCsvRandom(100, 100, 300);
+    }
+}
+\end{lstlisting}
+
+\subsubsection{Importare il csv creato su Neo4j}
+Seguire i seguenti passi in ordine:
+\begin{itemize}
+\item{1:} Inserire tutti i csv creati nella cartella destinata all'import di Neo4j\\ \url{https://neo4j.com/developer/guide-import-csv/}{https://neo4j.com/developer/guide-import-csv/}.
+\item{2:} Eseguire in ordine e singolarmente i comandi contenuti in \textit{configurationCsv/neo4j/comandi.txt}
+\end{itemize}
+
+\subsubsection{Importare il csv creato su OrientDB}
+Seguire i seguenti passi in ordine:
+\begin{itemize}
+\item{1:} Inserire sia csv appena creati che tutte le configurazioni json in \textit{configurationCsv/orientdb/*.json} in una cartella visibile a orientdb.
+\item{2:} Eseguire tutti i file di configurazione json come descritto nel punto 3 al seguente indirizzo \url{https://orientdb.com/docs/2.2/Import-from-CSV-to-a-Graph.html}{https://orientdb.com/docs/2.2/Import-from-CSV-to-a-Graph.html} e nel seguente ordine: entity,account,entity\textunderscore account, transaction.
+\end{itemize}
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+\section{Scelta Tecnologica}
+\subsection{Introduzione}
+Questa sezione espone i motivi per cui sono state scelte o rifiutate determinate tecnologie. Queste scelte sono state affrontate dopo una riunione avvenuta con il mio Tutor, Giuseppe Pavan, nella quale sono state affrontati i vantaggi e svantaggi delle varie tecnologie e successivamente decise le 2 soluzioni pi\'u valide secondo le informazioni raccolte.\\
+\textbf{Le tecnologie scelte sono Neo4j e OrientDB}.
+
+\subsection{Tecnologie rifiutate con breve motivazione}
+\begin{itemize}
+\item{Sparksee:} clustering molto approssimativo, versione gratuita solo per fini accademici e limitata ad 1 milione di nodi, pochissima community.
+\item{ArangoDB:} essendo multi modello sarebbe un ottima opzione per la scelta tecnologica ma non essendo \termine{nativo} si \'e preferito scegliere OrientDB.
+\item{AllegroGraph:} essendo nato per il web semantico il suo use case principale \'e troppo lontano dall'ambito anti frode.
+\item{IBM System G:} licenza solo per fini non commerciali, poca documentazione e community.
+\item{TitanDB:} sistema troppo complesso da creare solo per un PoC e troppo modulare con pi\'u possibilit\'a di malfunzionamento.
+\end{itemize}
+
+\subsection{Tecnologie scelte con motivazione}
+
+\begin{itemize}
+\item{Neo4j:} il principale motivo per cui \'e stato scelto Neo4j come tecnologia \'e il suo linguaggio di quering, chiamato chyper, essendo molto espressivo, semplice e ben documentato. Successivamente \'e stata valutata molto positiva la sua diffusione mondiale e di conseguenza l'ampiezza della sua community che pu\'o essere sfruttata per aumentare la conoscenza tecnica che la documentazione ufficiale non pu\'o fornire.  Non \'e stato molto apprezzato il fatto che il clustering non sia disponibile nella versione community ma Neo4j \'e la migliore alternativa, si carta, di un database esclusivamente a grafo nativo per velocit\'a, supporto ed espressivit\'a.
+\item{OrientDB:} il principale motico per cui \'e stato scelto OrintDB come teconologia \'e per il fatto che \'e un database multi modello, quindi con una possibilit\'a di ampliare gli use case, ma allo stesso ha tutti i vantaggi di avere un modello a grafo \termine{nativo}, al contrario di ArangoDB. Successivamente \'e stato molto apprezzato il fatto che gi\'a nella versione community il clustering sia disponibile. Non \'e stato apprezzato molto il linguaggio di quering ma OrientDB \'e la migliore alternativa, su carta, dei database multi livello.
+\end{itemize}
+
+
+
+\subsection{Scelte}

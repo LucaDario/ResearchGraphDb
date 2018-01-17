@@ -1,0 +1,52 @@
+\section{Conclusioni}
+
+\subsection{Introduzione}
+In questa sezione verranno descritti i vantaggi e svantaggi di delle basi di dati a grafo, pro e contro tra \textit{Neo4j} e \textit{OrientDB}, considerazioni emerse dalle prove effettuate ed infine considerazioni personali sia sulle tecnologie che, in generale, nelle basi di dati a grafo.
+
+\subsection{Basi di dati a grafo}
+\subsubsection{Vantaggi}
+\begin{itemize}
+\item{Velocit\'a:} la velocit\'a di determinate query, solitamente quelle che si riescono a ricondurre a dei grafi, \'e capace di restare indipendente dall'ampiezza del database stesso, questo succede quando la query si riduce ad eseguire banali, e indipendenti dalla ampiezza del DB, operazioni sui grafi come contare gli archi uscenti ed entranti. L'ambito anti frode si addice molto a questi tipi di query perch\'e molte operazioni si riducono al "\textit{conta quante volte la persona \textbf{A} ha fatto una determinata cosa, chiamata \textbf{B},  verso un entit\'a \textbf{B}}" dove A e B sono nodi e Z \'e l'arco che li collega.
+
+\item{Espressivit\'a della ricerca:} se lo use case che si va a modellare \'e adatto alla natura dei grafi, l'espressivit\'a nella ricerca \'e tale che la query risulta banale anche dal punto di vista della scrittura. 
+
+\item{Tutto \'e collegato:} se lo use case che si va a modellare e si \textit{astuti} nel organizzare i dati si ha un enorme possibilit\'a di creare ricerche che esplorano in profondit\'a il grafo date determinate condizioni. Nel ambito anti frode succede molto spesso di eseguire delle ricerche su entit\'a che hanno relazione, che pu\'o avere una cardinalit\'a \textit{n>0}, rispetto ad un altra entit\'a date delle particolari condizioni nelle relazioni. 
+
+\end{itemize}
+
+\subsubsection{Svantaggi}
+
+\begin{itemize}
+
+\item{Use case limitati:} solo pochi use case sono adatti ad essere modellati come un grafo, \'e molto rischioso prendere la decisione di modellare totalmente la propria base di dati come un grafo, anche se in quel momento il proprio use case sarebbe adatto, perch\'e in un futuro potrebbe esserci la necessit\'a di aggiungere dati,al modello, non adatti ad un database a grafo. Questo limita molto il normale ciclo di vita di un software.
+
+\item{Tecnologia di nicchia:} essendo ancora un tecnologia di nicchia la possibilit\'a di informarsi, attraverso la community, \'e ridotta rispetto ad un altra tecnologia pi\'u diffusa come possono essere i database orientati ai documenti.
+
+
+\end{itemize}
+
+
+\subsection{Neo4j}
+
+\subsubsection{PRO}
+
+\begin{itemize}
+\item{Espressivit\'a:} chyper, il linguaggio di quering proprietario di neo4j, inizialmente pu\'o spaventare, essendo completamente diverso dai linguaggi di quering che siamo abituati ad usare, ma dopo un breve periodo apprendimento risulta visivamente espressivo, facile da utilizzare e molto potente nelle ricerche sui grafi.
+\item{Spring Data Neo4j:} al contrario di quella per orientDB \'e ben fatta e documentata.
+\item{Import csv:} l'import tramite csv risulta molto pi\'u veloce sia come velocit\'a che come dinamica perch\'e, al contrario di orientDB, non \'e necessario creare nessun file di configurazione in json.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

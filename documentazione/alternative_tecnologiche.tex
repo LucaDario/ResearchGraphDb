@@ -1,0 +1,185 @@
+\section{Alternative Tecnologiche}
+\subsection{Introduzione}
+La racconta delle informazioni necessarie alla scelta sono state reperite in primo luogo dalle documentazioni ufficiali delle case produttrici, successivamente dai forum quali StackOverflow, DZone.
+Grazie ad una riunione con il mio Tutor aziendale, Giuseppe Pavan, sono stati decisi i seguenti punti di interesse per focalizzare l'analisi tecnologica.
+\begin{itemize}
+\item{Licenza:} verificare che tipo di licenza ha il prodotto e sopratutto se ha una versione gratuita e che tipo li limitazioni ha rispetto a quella a pagamento.
+\item{Tipo:} verificare il tipo di tecnologia implementa, se una base di dati a grafo \termine{nativa} o non nativa.
+\item{Modelli disponibili:} verificare che tipi di \termine{Modelli} offre questa tecnologia.
+\item{Community:} verificare l'ampiezza di community del prodotto in analisi, se un prodotto ha una community molto sviluppata \'e possibile ricercare consigli o risoluzioni di determinati problemi nei vari forum di riferimento.
+\item{Tecnologie sopportate nativamente(di rilievo per l'azienda):} verificare se la tecnologia mette a disposizione un supporto a tecnologie di riferimento all'azienda quali Java, Spring.
+\item{Linguaggio di quering proprietario:} verificare se la tecnologia in analisi mette a disposizione un linguaggio di quering proprietario e ottimizzato per essa, analizzando la sua espressivit\'a.
+\item{Supporto Tinkerpop:} verificare se la tecnologia mette a disposizione il supporto ad Apache \termine{tinkerpop}, sfruttando quindi un interfaccia comune permettendo poi un passaggio ad un altra tecnologia che lo supporta a costi nulli.
+\item{Clustering:} verificare se la tecnologia mette a disposizione un sistema di clustering pronto all'uso, che tipo di clustering e se ha la possibilit\'a di eseguire query distribuite ed infine se questa \'e disponibile nelle versione gratuita.
+\item{Security:} verificare che sistemi di sicurezza dei dati la tecnologia mette a disposizione e se \'e possibile dividere il database in zone per farle diventare accessibili solo a determinati utenti.
+\end{itemize}
+\subsection{\url{Sparksee(DEX)}{http://www.sparsity-technologies.com}:}
+Sparksee \'e un database a grafo \termine{nativo} \termine{full ACID} scritto in C++ sviluppato da \url{Sparsity Technologies}{http://www.sparsity-technologies.com} a fine 2008 sotto nome "DEX" e successivamente, nel 2014, cambia il suo nome in Sparksee.\\
+Sparksee \'e il primo database a grafo disponibile per Android ed iOS.
+Ad oggi sia la versione desktop che mobile sono alla 5.2.
+\begin{itemize}
+\item \textbf{Licenza:} commerciale a pagamento, disponibile quella gratuita esclusiva per la valutazione o per fini accademici limitata a 1 milione di nodi.
+\item \textbf{Tipo:} database multi grafo, Full ACID ed orientato di tipo nativo, con la possibilit\'a di aggiungere un numero illimitato di etichette sia sui nodi che sugli archi.
+\item \textbf{\termine{Modelli} disponibili:} disponibile solamente \termine{modello a grafo}.
+\item \textbf{Community:} molto bassa data la bassa diffusione a livello mondiale.
+\item \textbf{Tecnologie supportate nativamente(di rilievo per l'azienda):} Java, Maven, C++ e disponibile per Linux, Windows, MacOS, iOS, Android, BB10.
+\item\textbf{Linguaggio di quering proprietario:} API proprietarie disponibili per Java,C++,Phyton.
+\item\textbf{Supporto \termine{Tinkerpop}:} Si.
+
+\item\textbf{Clustering:} feauture gratuita ma molto approssimativa visto che in caso di malfunzionamento del master tutto il sistema andrebbe in down, oppure se, durante un operazione di scrittura, uno slave dovesse avere un malfunzionamento il master resterebbe in una sorta di limbo per un tempo infinito ad aspettare, inutilmente, l'avvenuta scrittura dal parte dello stesso slave. Le richieste di scrittura le riceve solo il master che, esso, le inoltrer\'a agli slave, invece quelle di lettura vengono ricevute da tutti gli slave.
+\item\textbf{Security:} Non specificata nella loro documentazione e non travata in nessun forum.
+\item\textbf{Monitoring:} \'e possibile attivare la registrazione e memorizzazione dei log e warning, statistiche come size del database, sessioni attive tempo di attivit\'a.
+\item\textbf{Qualit\'a secondo la casa produttrice e informazioni aggiuntive:} 
+\begin{itemize}
+\item\textbf{Alta compressione:} la casa produttrice promette di "minimizzare" lo spazio occupato dal database grazie all'alta velocit\'a di compressione data struttura rappresentata in bitmap. Ogni dato \'e rappresentato solo una volta, evitando repliche inutili.
+\item\textbf{I/O efficiente:} ciascuna delle bitmap \'e partizionata in blocchi per migliorare la localizzazione I/O.
+\end{itemize}
+\end{itemize}
+\newpage
+
+
+
+\subsection{\url{Neo4j}{https://neo4j.com/}}
+Neo4j \'e un software per base di dati a grafo \termine{nativo}, \termine{full ACID}, sviluppato in Java dalla Neo Technology  nel 2007.
+E' il software del suo genere pi\'u usato al mondo ed \'e usato da multinazionali come Microsoft, AirBnb, IBM, Ebay.
+Attualmente \'e alla versione 3.2.4.
+Ad oggi sia la versione desktop che mobile sono alla 5.2.
+\begin{itemize}
+\item \textbf{Licenza:} GNU GPL v3 con versione interprise a pagamento. La versione gratuita non ha limiti sulla dimensione del database ma la versione interprise aggiunge il supporto al crustering, la versione embedded e supporto 24/7.
+\item \textbf{Tipo:} database multi grafo, Full ACID ed orientato di tipo nativo, con la possibilit\'a di aggiungere un numero illimitato di etichette sia sui nodi che sugli archi.
+\item \textbf{\termine{Modelli} disponibili:} disponibile solamente \termine{modello a grafo}.
+\item \textbf{Community:} essendo il software per database a grafo pi\'u diffuso ha una community relativamente molto ampia.	
+\item \textbf{Tecnologie supportate nativamente(di rilievo per l'azienda):} Java, Maven, Spring Data Neo4j, Phyton per quanto riguarda la versione server tramite REST, invece la versione embedded solo da linguaggi che usano la JVM. E' disponibile per Windows, linux e MacOS, infine \'e distribuita e mantenuta ufficialmente da Docker.
+\item\textbf{Linguaggio di quering proprietario:} si, neo4j utilizza Chyper come linguaggio di quering proprietario ed esso \'e totalmente sviluppato per l'ambito dei grafi. Questo linguaggio risulta molto potente ed espressivo nella ricerca dei dati sopratutto quando il grado di complessit\'a aumenta.\\
+Esempio: "(p:Payee{payeeId:"IT321"})<-[r:TRANSACTION]-(pa:Payer{payeeId:"IT123"}) return count(r)" restituisce il numero di transazioni che ha effettuato il Payer con un determinato id ad un determinato Payee.
+\item\textbf{Supporto \termine{Tinkerpop}:} Si.
+
+\item\textbf{Clustering:} solo nella versione Enterprise con la possibilit\'a di eseguire query distribuite, eseguire un ripristino di emergenza per recuperare i dati, e viene garantita la funzionalit\'a del sistema anche con un guasto su 4 macchine.
+\item\textbf{Security:} neo4j espone best practice da utilizzare, come usare subnet, firewalls, https per l'accesso remoto e certificati sicuri SSL, per garantire la sicurezza dei dati. Neo4j aggiunge, anche, la possibilit\'a di dividere il database in sotto grafi accessibili solo da determinati utenti, decisi dall'amministratore.
+\item\textbf{Monitoring:} \'e possibile sia esportare i dati in csv sia inviarli ad un tool proprietario chiamato Graphite oppure ad un qualsiasi tool che condivide lo stesso protocollo di comunicazione.
+\item\textbf{Qualit\'a secondo la casa produttrice e informazioni aggiuntive:} 
+\begin{itemize}
+\item{Algoritmi nativi inclusi:} Shortest paths, all paths, all simple paths,  Dijkstra.
+\item{Salvataggio dei dati:} tutti i dati e le informazioni del grafo che il server storicizza e gestisce vengono salvate al interno di un unica directory. Ogni database o grafo possiede una propria Database Directory, e un server pu\'o gestire una sola directory per volta.
+\item{Compatibilit\'a con \termine{Lucene}:} Si.
+\item{Casi d'uso principali}: l'ambito anti frode, secondo i loro casi d'uso ideali, sempre essere il favorito data dalla natura dei database a grafo nativi.
+\item{Dashboard:} disponibile una dashboard grafica per effettuare query, gestire le restrizione di sicurezza.
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\url{ArangoDB}{https://www.arangodb.com/}}
+ArangoDB \'e un database NOSQL nativo \termine{multi modello} sviluppato in C++ ed JavaScript nato nel 2011. E' un database principalmente documentale ma con tabelle che raccogliendo la chiave di entrata e quella di uscita, simulano il funzionamento dei database a grafo nativi. Gli sviluppatori di ArangoDB promettono la flessibilit\'a data dai database documentali e la velocit\'a paragonabile ai database a grafo.\\
+Attualmente l'ultima versione \'e la 3.2.4.
+\begin{itemize}
+\item \textbf{Licenza:} Apache 2, nella versione gratuita limitazioni solo su sicurezza e assistenza clienti.
+\item \textbf{Tipo:} NoSQL nativo \termine{multi livello}.
+\item \textbf{\termine{Modelli} disponibili:} supporta key/value, documentale e \termine{modello a grafo non nativo}.
+\item \textbf{Community:} livello di community non sviluppatissima come i leader nel settore come Neo4j ma nemmeno assente come Sparksee.
+\item \textbf{Tecnologie supportate nativamente(di rilievo per l'azienda):} java, Spring Data(non nativo), Maven.
+\item\textbf{Linguaggio di quering proprietario:} AQL, linguaggio simile ad SQL in comune con tutti i modelli.
+\item\textbf{Supporto \termine{Tinkerpop}:} no.
+
+\item\textbf{Clustering:} gratuita con possibilit\'a di sincronizzazione sincrona, asincrona e query distribuite. ArangoDB \'e si basa su \termine{Apache Mesos}.
+\item\textbf{Security:} arangoDB mette a disposizione la possibilit\'a di dividere il database in frammenti e renderli accessibili solo a determinati utenti. Per l'accesso remoto \'e possibile proteggere i file con SSL, infine , con una perdita di velocit\'a minima, \'e possibile sfruttare da decriptazione hardware per sfruttare la cifratura AES. 
+\item\textbf{Qualit\'a secondo la casa produttrice e informazioni aggiuntive:} 
+\begin{itemize}
+\item{Organizzazione in ram:} arangoDB, essendo organizzato solo in ram come un database a grafo, \'e prestante solo se la macchina \'e capace di contenere interamente la base di dati nella memoria temporanea.
+\item{Query:} essendo implementato implementato come un documentale, secondo il sito ufficiale di arangoDB, le ricerche su percorsi con lunghezza nota \'e pi\'u efficiente rispetto alle base di dati a grafo \termine{native}.
+\item{Natura del DB:} essendo \termine{multi modello} ci sono maggiori possibilit\'a di estensione ad altri casi d'uso.
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\url{AllegroGraph}{https://franz.com/agraph/allegrograph/}}
+AllegroGraph \'e un software per base di dati a grafo \termine{nativo} sviluppato insieme agli standard W3C da FranzInc per il web semantico nel 2004. AllegroGraph \'e considerato un implementazione di riferimento per il protocollo RDF ed attualmente \'e alla versione 6.3.
+\begin{itemize}
+\item \textbf{Licenza:} licenza commerciale.
+\item \textbf{Tipo:} database multi grafo orientato di tipo nativo con la possibilit\'a di aggiungere un numero illimitato di etichette nei nodi e negli archi.
+\item \textbf{\termine{Modelli} disponibili:} disponibile sono il \termine{modello a grafo}.
+\item \textbf{Community:} il prodotto \'e poco diffuso e quindi ha una community poco ampia.
+\item \textbf{Tecnologie supportate nativamente(di rilievo per l'azienda):} Java, Maven. 
+\item\textbf{Linguaggio di quering proprietario:} nessun linguaggio proprietario, supporta SPARQL.
+\item\textbf{Supporto \termine{Tinkerpop}:} No.
+
+\item\textbf{Clustering:} Si vengono replicati i dati nei vari Slave ma le scritture devono essere eseguite prima dal master. AllegroGraph da la possibilit\'a di eseguire query distribuite.
+\item\textbf{Security:} Da la possibilit\'a di un reporting realtime.
+\item\textbf{Qualit\'a secondo la casa produttrice e informazioni aggiuntive:} 
+\begin{itemize}
+\item{Web semantico:} il principale use case \'e il web semantico.
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\url{OrientDB}{https://orientdb.com/}}
+OrientDB \'e un software per base di dati multi modello sviluppato in Java da uno sviluppatore italiano, Luca Garulli. \'E un DB principalmente documentale ma con con tabelle che raccolgono, attraverso raccolte dedicate, le key di entrata e key di uscita per simulare il funzionamento di grafi. Ad oggi OrientDB \'e alla versione stabile 2.29 ed alla beta 3.0.
+\begin{itemize}
+\item \textbf{Licenza:} Apache 2, con versione community con nessuna limitazione di rilievo.
+\item \textbf{Tipo:} database transazionale multi modello, schema-less, schema-full e schema-mixed.
+\item \textbf{\termine{Modelli} disponibili:} documentale, key/value, grafo nativo, geospaziale e reactive.
+\item \textbf{Community:} medio-alta, non ampia come Neo4j ma di rilievo.
+\item \textbf{Tecnologie supportate nativamente(di rilievo per l'azienda):} Java, Maven, Spring Data non nativa. Disponibile per windows, linux e disponibile immagine docker.
+\item\textbf{Linguaggio di quering proprietario:} si, per scelta puramente commerciale hanno deciso di integrare un linguaggio di quering molti simili a SQL limitando di molto l'espressivit\'a nelle ricerce nel modello a grafo.
+\item\textbf{Supporto \termine{Tinkerpop}:} Si.
+
+\item\textbf{Clustering:} feature gratuita, offre la possibilit\'a di creare repliche distribuite e l'esecuzione di query in pi\'u server per aumentare la velocit\'a.
+\item\textbf{Security:} offre la possibilit\'a di dividere il database in frammenti e renderli accessibili solo a determinati utenti. Per l'accesso da remoto \'e possibile proteggere i file con SSL. Infine \'e possibile proteggere i dati con cifratura AES e DES.	
+\item\textbf{Qualit\'a secondo la casa produttrice e informazioni aggiuntive:} 
+\begin{itemize}
+\item{Sicurezza:} secondo il loro sito \'e il pi\'u sicuro database NO-SQL nel mercato.
+\item{Replicazione obbligata:} come fa un database documentale supportare un modello a grafo nativo? Replicando le relazioni in documenti con gli indici fisici, questo aumenta la velocit\'a ma allo stesso tempo lo spazio necessario per immagazzinare dati nel disco.
+\item{Espressivit\'a delle query:} il linguaggio SQL non essendo stato creato per database a grafo risulta poco espressivo e verboso per ricerche che coinvolgono pi\'u un certo numero di nodi.
+\end{itemize}
+\end{itemize}
+
+\subsection{\url{IBM System G}{http://systemg.research.ibm.com/}}
+IBM System G \'e un software per base di dati a grafo sviluppato in C++ sviluppato da IBM. Attualmente \'e alla versione 1.5.
+\begin{itemize}
+\item \textbf{Licenza:} personale e commerciale. la licenza personale non ha nessuna limitazione tranne per il fatto che il software che lo utilizza non pu\'o essere distribuito o venduto.
+\item \textbf{Tipo:} modello a grafo nativo.
+\item \textbf{\termine{Modelli} disponibili:} disponibile solamente il modello a grafo.
+\item \textbf{Community:} molto bassa.
+\item \textbf{Tecnologie supportate nativamente(di rilievo per l'azienda):} nativamente non supporta tecnologie di rilievo per l'azienda. Supporta solo api python interfacciandosi con la shell di IBM System G.
+\item\textbf{Linguaggio di quering proprietario:} No.
+\item\textbf{Supporto \termine{Tinkerpop}:} Si.
+
+\item\textbf{Clustering:} dal sito ufficiale o dalla poca cummunity non lo si intuisce.
+\item\textbf{Security:}  dal sito ufficiale o dalla poca cummunity non lo si intuisce.
+\item\textbf{Qualit\'a secondo la casa produttrice e informazioni aggiuntive:} 
+\begin{itemize}
+\item{Prestazioni:} secondo il loro sito le loro prestazioni sono comparabili con Neo4j.
+\item{Ottimizzazione} secondo il loro sito,essendo sviluppato in C++, c'\'e possibilit\'a molta di ottimizzazione.
+\end{itemize}
+\end{itemize}
+
+
+\subsection{\url{Titan}{http://titan.thinkaurelius.com/}}
+Titan \'e un database a grafo ottimizzato per il salvataggio e ricerche in un storage contenente miliardi di nodi ed archi. Titan \'e in grado di sfruttare storage backends come Apache Cassandra per l'immagazzinamento dei dati. Supporta il principio ACID.
+Attualmente \'e alla versione 1.0.
+\begin{itemize}
+\item \textbf{Licenza:} Apache 2.
+\item \textbf{Tipo:} i dati non vengono organizzati come un database a grafo \termine{nativo} ma vengono astratti da Titan come se lo fossero.
+\item \textbf{\termine{Modelli} disponibili:} disponibile solo il modello a grafo.
+\item \textbf{Community:} bassa.
+\item \textbf{Tecnologie supportate nativamente(di rilievo per l'azienda):} nativamente non supporta tecnologie di rilievo per l'azienda.
+\item\textbf{Linguaggio di quering proprietario:} nativamente supporta \termine{Tinkerpop}.
+\item\textbf{Supporto \termine{Tinkerpop}:} Si, \'e l'unico ed il so modo per interfacciarsi con Titan.
+
+\item\textbf{Clustering:} dipende dallo storage backend usato(es. Cassandra, HBase)
+\item\textbf{Security:}  dipende dallo storage backend usato(es. Cassandra, HBase)
+\item\textbf{Qualit\'a secondo la casa produttrice e informazioni aggiuntive:} 
+\begin{itemize}
+\item{Modularit\'a} titan non ha uno storage backends integrato ma permette di integrarne uno a scelta tra Apache Cassandra, HBasee Oracle BerkeleyDB. Inoltre supporta le piattaforme Apache Spark, Apache Giraph, Apache Hadoop.
+\item{Vantaggi delle modularit\'a:} se un azienda usasse gi\'a uno storage backend compatibile con Titan, ad esempio HBase, il salto tecnologico sarebbe legato solo a Titan.
+\item{Svantaggi della modulatit\'a:} essendoci tante possibilit\'a di personalizzazione le probabilit\'a che qualche componente abbia un malfunzionamento \'e pi\'u alta rispetto ad un prodotto stand alone. 
+
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+
+
+

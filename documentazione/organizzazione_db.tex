@@ -1,0 +1,17 @@
+\section{Organizzazione della struttura di dati}
+\section{Introduzione}
+In questa sezione verr\'a descritta la struttura di base comune dei vari database.
+\subsection{Nodi}
+\begin{itemize}
+\item{EntityId:} \'e il nodo che rappresenta una entity, un entity puo avere da 0 ad n AccountId associati a lui(ad esempio iban). Questo nodo \'e identificato con una stringa chiamata \textit{entityId}. Questo pu\'o effettuare transazioni ma non pu\'o riceverle.
+
+\item{AccountId:} \'e il nodo che rappresenta un account, ad esempio un iban, ed \'e identificato da una stringa chiamata \textit{accountId}. Questo pu\'o effettuare e ricevere transazioni.
+
+\end{itemize}
+
+\subsection{Archi}
+\begin{itemize}
+\item{OWN:} \'e l'arco per descrivere la relazione di appartenenza, l'arco di tipo  \textit{OWN} ha origine da un EntityId verso un AccountId. Un EntityId pu\'o avere \textit{n>=0} archi di tipo \textit{OWN} come una persona pu\'o avere \textit{n>=0} iban.
+\item{TRANSACTION:} \'e l'arco che rappresenta una transazione. Una transazione pu\'o avvenire sia da un EntityId verso un AccountID, sia da un AccountId verso un altro AccountId. Un AccountId oppure un EntityId pu\'o avere \textit{n>=0} archi di tipo \textit{TRANSACTION}.
+
+\end{itemize}

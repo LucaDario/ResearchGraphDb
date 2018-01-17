@@ -1,0 +1,311 @@
+%%% XProbes Docs
+%%%
+%%% http://www.iks.it
+%%% Internal procedural guides
+%%% 07/2014
+
+%%%%% Preamble
+% KOMA scrartcl is called for several reasons:
+%   Nicer page margins without the need of the 'geometry' package
+%   Perfectly fitting abstract environment
+%   High customizability
+\documentclass[11pt,a4paper]{scrartcl}
+%%%%%%%% Per code java
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\lstset{language=Java}
+
+
+
+
+%%% Packages %%%
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath,amsfonts,amssymb}  % Math packages
+\usepackage{multicol}
+%%% URLs
+\usepackage{hyperref}
+%%% Graphics
+\usepackage{graphicx}
+%%% Colors & graphics
+\usepackage[table]{xcolor}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{longtable}
+
+%%% Code Listing
+\usepackage{listings}
+%%% URLs
+\usepackage{hyperref}
+
+%%% Framed
+\usepackage{framed}
+\usepackage{mdframed}
+
+\usepackage{caption}
+\captionsetup[lstlisting]{font={small}}
+
+%%% Define colors
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+
+\lstset{frame=tb,
+  escapeinside={(*}{*)},%
+  language=bash,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+  tabsize=3,
+  keywords=[2]{GET, POST, DELETE, UPDATE, PATCH},
+  keywordstyle={[2]\color{blue}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Definitions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Define a new command that prints the title only
+\makeatletter       % Begin definition
+\def\printtitle{	% Define command: \printtitle
+    {\centering \huge \normalfont \textbf{\@title}\par}}	% Typesetting
+\makeatother		% End definition
+
+%%% Global vars for the doc	
+\newcommand{\projectName}{Project\registered{}}
+\newcommand{\companyName}{XTN : Stage Univerit\`a di Padova}
+\newcommand{\docName}{Base di Dati a Grafo in ambito antifrode}
+\newcommand{\versionNum}{1.0}
+\newcommand{\termine}[1]{\textit{#1}\small{$_G$}}
+\renewcommand{\url}[2]{\href{#2}{\textcolor{blue}{\texttt{#1}}}}
+\newcommand{\link}[1]{\href{#1}{\textcolor{blue}{\texttt{#1}}}} 
+
+
+% apiversion defines the MORE API Version in URL Scheme
+% this MUST be changed when updating the API to a new verion.
+\def \apiversion {3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Disclosure Policy %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\secretDoc}{~}
+\newcommand{\privateInternalDoc}{X}
+\newcommand{\privateBusinessDoc}{~}
+\newcommand{\publicDoc}{~}
+\newcommand{\registered}{$^{\scriptsize\mathrm{\textregistered{}}}$}
+\newcommand{\ident}[1]{\textit{#1}}
+\newcommand{\method}[1]{\textbf{#1}}
+\newenvironment{request}[1]{\begin{mdframed}[backgroundcolor=black!5,linecolor=red!60!black,linewidth=2pt,topline=false,
+  rightline=false,
+  bottomline=false,innertopmargin=8pt,innerbottommargin=6pt] \method{#1}~}{\end{mdframed}}
+\newcommand{\paramex}[1]{\textcolor{mauve}{\texttt{#1}}}
+\newcommand*\pct{\scalebox{.8}{\%}}
+
+\title{Base di Dati a Grafo in ambito antifrode}
+
+%%% Define a new command that prints the author(s) only
+\makeatletter           % Begin definition
+\def\printauthor{       % Define command: \printauthor
+    {\large \@author}}  % Typesetting
+\makeatother            % End definition
+
+\author{
+	Luca Dario \\
+	\companyName \\
+	\texttt{luca.dario29@gmail.com}\vspace{40pt} \\
+    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Header and footer %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}  % Needed to define custom headers/footers
+	\pagestyle{fancy}  % Enabling the custom headers/footers
+\usepackage{lastpage}	
+
+% Header (empty)
+\lhead{\includegraphics[scale=0.55]{xtn}}
+\chead{}
+\rhead{\projectName~ - ~\docName}
+% Footer (you may change this to your own needs)
+\lfoot{\footnotesize \companyName \\
+    Headquarter: Arco (TN), via Santa Caterina 95 - 38062 \\
+    Executive Office: Rovereto (TN), C.so Rosmini, 8 - 38068 \\
+    +39 049 870 10 10 (phone) \textbullet ~+39 049 870 10 14 (fax) \\
+    info@xtn-lab.com \textbullet ~www.xtn-lab.com \\
+    P.I \textbullet ~C.F. \textbullet ~Reg. Imprese 04395340286
+}
+\cfoot{}
+\rfoot{\footnotesize page \thepage\ of \pageref{LastPage}}	% "Page 1 of 2"
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+%%% Change the 'KOMA' sectioning fonts back to standard LaTeX font (this is just a matter of taste)
+\setkomafont{sectioning}{\rmfamily\bfseries\boldmath}
+
+%%% Change the abstract environment
+\usepackage[runin]{abstract}        % runin option for a run-in title
+\setlength\absleftindent{10pt}      % left margin
+\setlength\absrightindent{10pt}     % right margin
+\abslabeldelim{\quad}				 
+\setlength{\abstitleskip}{-10pt}
+\renewcommand{\abstracttextfont}{\small \slshape}	% slanted text
+\usepackage[latin1]{inputenc}
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+    \put(0,0){%
+        \parbox[b][\paperheight]{\paperwidth}{%
+            \vfill
+            \centering
+            \includegraphics[width=\paperwidth,height=\paperheight,%
+            keepaspectratio]{page_background.png}%
+            \vfill
+        }
+    }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Document start %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\AddToShipoutPicture*{\BackgroundPic} %%% without * replicate on all pages
+
+%%% Top of the page: Author, Title and Abstact
+\begin{minipage}[t]{0.35\linewidth}
+	\begin{flushright}
+		\printauthor
+	\end{flushright}
+\end{minipage} \hspace{0pt}
+%
+\begin{minipage}[b]{0.02\linewidth}
+	%%\rule{3pt}{175pt}
+	\rule{0pt}{175pt}
+\end{minipage} \hspace{0pt}
+%
+\begin{minipage}[t]{0.63\linewidth}
+%\begin{flushleft}
+\printtitle 
+\vspace{5pt}
+	\begin{abstract} 
+Questo documento descrive il processo di analisi delle varie tecnologie, che utilizzano base di dati a grafo, e il successivo sviluppo del Poc.
+	\end{abstract}
+%\end{flushleft}
+\end{minipage}
+\vspace{20pt}       % Add some vertical spacing to separate the abstract from the rest of the article
+
+\pagebreak % NEWPAGE FOR AESTHETICS
+
+%%% TABLE OF CONTENTS
+\tableofcontents
+\pagebreak % NEWPAGE FOR AESTHETICS
+
+%%% METADATA
+\section{Metadata}
+These section reports all info about this document.
+
+\subsection{Scope}
+
+\begin{center}
+    \raggedright
+    \begin{tabular}{| l | l |}
+    \hline
+    SECRET & \secretDoc\\
+    \hline
+    PRIVATE INTERNAL USE & \privateInternalDoc\\
+    \hline
+    PRIVATE BUSINESS USE & \privateBusinessDoc\\
+    \hline
+    PUBLIC & \publicDoc\\
+    \hline
+    \end{tabular}
+\end{center}
+The information contained herein are privileged and confidential. If you are not the intended recipient, please contact the sender and delete this document. Any unauthorised copying of this document or unauthorised distribution of the information is strictly prohibited.
+\bigskip
+
+\subsection{Version and Revisions}
+
+Authoring history:
+\begin{center}
+    \raggedright
+    \begin{tabular}{|p{3cm}|p{3cm}|p{3.5cm}|p{2cm}|}
+    \hline
+    \textit{Version number} & \textit{Author} & \textit{Team} & \textit{Date} \\
+    \hline  0.1 & Luca Dario & \companyName & 31/10/17 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+Review history:
+\begin{center}
+    \raggedright
+    \begin{tabular}{|p{3cm}|p{3cm}|p{3.5cm}|p{2cm}|}
+    \hline
+    \textit{Review version} & \textit{Author} & \textit{Team} & \textit{Date} \\
+    \hline    1.0 & ~ & \companyName & ~ \\
+    \hline
+    \end{tabular}
+\end{center}
+
+Approved by:
+\begin{center}
+    \raggedright
+    \begin{tabular}{|p{3cm}|p{3cm}|p{2cm}|p{2cm}|}
+    \hline
+    \textit{Approved by} & \textit{Team} & \textit{Date} \\
+    \hline ~ & ~ & ~ \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\pagebreak % NEWPAGE FOR AESTHETICS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SECTION INTRODUCTION %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduzione}
+Questo documento descrive le scelte che mi hanno portato alla decisione delle tecnologie di base di dati a grafo pi\'u valide, in ambito antifrode.
+Dopo la fase di analisi il documento si focalizzer\'a nell'architettura del PoC sviluppato.
+
+\pagebreak % NEWPAGE FOR AESTHETICS
+
+%%% INLINE APIs %%%
+\input{alternative_tecnologiche.tex}
+\input{scelta_tecnologica.tex}
+\input{scelte_progettuali.tex}
+\input{organizzazione_db.tex}
+\input{manuale.tex}
+\input{conclusioni.tex}
+
+\end{document}
